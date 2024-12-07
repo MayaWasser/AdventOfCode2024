@@ -21,7 +21,7 @@ for i in range(len(eqs)):
     # number of +
     for j in range(n+1):
         # number of x
-        for k in range(n+1-j):
+        for k in range(n-j+1):
             for lst1 in combinations(range(n),j):
                 theRest = [a for a in range(n) if a not in lst1]
                 for lst2 in combinations(theRest, k):
@@ -36,31 +36,12 @@ for i in range(len(eqs)):
                     if total == eqs[i][0]:
                         sum += eqs[i][0]
                         pos = True
+                        break
                 if pos:
                     break
             if pos:
                 break
         if pos:
             break
-print(sum)
 
-# sum = 0
-# for i in range(len(eqs)):
-#     n = len(eqs[i])-2
-#     # number of +
-#     pos = False
-#     for j in range(n+1):
-#         for lst in combinations(range(n),j):
-#             total = eqs[i][1]
-#             for k in range(0,n):
-#                 if k in lst:
-#                     total += eqs[i][k+2]
-#                 else:
-#                     total *= eqs[i][k+2]
-#             if total == eqs[i][0]:
-#                 sum += eqs[i][0]
-#                 pos = True
-#                 break
-#         if pos:
-#             break
-# print(sum)
+print(sum)
