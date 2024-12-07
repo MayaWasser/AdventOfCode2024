@@ -18,7 +18,7 @@ for i in range(len(eqs)):
     n = len(eqs[i])-2
     # number of +
     pos = False
-    for j in range(n):
+    for j in range(n+1):
         for lst in combinations(range(n),j):
             total = eqs[i][1]
             for k in range(0,n):
