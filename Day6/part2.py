@@ -22,6 +22,7 @@ for i in range(1,m+1):
 count = 0
 for i in range(1,m+1):
     for j in range(1,n+1):
+        print(i,j)
         if grid[i][j] == ".":
             # test grid
             test = copy.deepcopy(grid)
@@ -30,16 +31,18 @@ for i in range(1,m+1):
             gi = initi
             gj = initj
             dir = [-1,0]
-            visited = set()
-            # while grid[gi][gj] != "O" and ((gi,gj,dir) not in visited):
-            #     visited.add((gi,gj,dir))
-            #     if grid[gi+dir[0]][gj+dir[1]] == "#":
-            #         dir = [dir[1], -dir[0]]
-            #     gi += dir[0]
-            #     gj += dir[1]
-            # if grid[gi][gj] != "O":
-            #     count += 1
-set 
+            visited = []
+            while test[gi][gj] != "O" and ([gi,gj,dir[0],dir[1]] not in visited):
+                visited.append([gi,gj,dir[0],dir[1]])
+                if test[gi+dir[0]][gj+dir[1]] == "#":
+                    dir = [dir[1], -dir[0]]
+                gi += dir[0]
+                gj += dir[1]
+
+            if grid[gi][gj] != "O":
+                count += 1
+
+print(count)
 # for i in range(1,m+1):
 #     for j in range(1,n+1):
 #         if grid[i][j] == "^":
