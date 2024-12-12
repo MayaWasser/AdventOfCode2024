@@ -7,41 +7,28 @@ for i in range(len(input)):
 grid.append(Os)
 
 m = len(grid)-2
-m = len(grid[0])-2
+n = len(grid[0])-2
 
-# # Find area and perimeter of a section, returns (area, perimeter)
-# def findAP (row, col, letter, sect):
-#     entry = grid[row][col]
-#     if entry == letter:
-#         grid[row][col] = sect
-#         left = findAP(row,col-1,letter,sect)
-#         right = findAP(row,col+1,letter,sect)
-#         up = findAP(row-1,col+1,letter,sect)
-#         down = findAP(row+1,col,letter,sect)
-#         area = left[0]+right[0]+up[0]+down[0]
-#         per = left[1]+right[1]+up[1]+down[1]
-#         return (area+1,per)
-#     if entry == sect:
-#         return (0,0)
-#     else:
-#         return (0,1)
-
-def findArea(row,col,letter,sect):
-    if grid[row][col] != letter:
-        return 0
-    else:
-        grid[row][col] = sect
-        return findArea(row+1,col,letter,sect)+findArea(row-1,col,letter,sect)+findArea(row,col+1,letter,sect)+findArea(row,col-1,letter,sect)+1
-
-def findPerimeter(row,col,letter,sect):
+# returns (area, perimeter)
+def findAP(row,col,letter,sect):
     if grid[row][col] == sect:
-        return 0
-    if grid[row][col] != letter :
-        return 1
+        return (0,0)
+    if grid[row][col] != letter:
+        return (0,1)
     else:
         grid[row][col] = sect
-        return findPerimeter(row+1,col,letter,sect)+findPerimeter(row-1,col,letter,sect)+findPerimeter(row,col+1,letter,sect)+findPerimeter(row,col-1,letter,sect)
+        l= findAP(row,col-1,letter,sect)
+        r = findAP(row,col+1,letter,sect)
+        u = findAP(row+1,col,letter,sect)
+        d = findAP(row-1,col,letter,sect)
+        return (l[0]+r[0]+u[0]+d[0]+1, l[1]+r[1]+u[1]+d[1])
 
+price = 0
+for i in range(1,m+1):
+    for j in range(1,n+1):
+        if grid[i][j].isalpha():
+            a,p = findAP(i,j,grid[i][j],str(sect))
+            price += a*p
+            sect += 1
 
-for i in grid:
-    print(i)
+print(price)
